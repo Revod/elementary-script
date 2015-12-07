@@ -1,6 +1,7 @@
 [Icon Theme]
 Name=Numix Circle
 Comment=Numix icon theme with a circular apps icons design
+Inherits=
 
 Example=directory-x-normal
 
