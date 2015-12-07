@@ -1,6 +1,6 @@
 [Icon Theme]
 Name=elementary+
-Inherits=Numix-Circle,Ultra-Flat-Icons,elementary
+Inherits=Numix-Circle,Ultra-Flat,elementary
 Comment=A collection of additions to the default icon theme of elementary OS.
 
 Example=directory-x-normal
