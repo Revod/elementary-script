@@ -1,9 +1,21 @@
 #!/bin/bash
+echo "Fixing icons..."
+echo ""
+echo "Downloading Numix Circle icons config..."
+sleep 2
 sudo su -c 'curl https://raw.githubusercontent.com/michaldaniel/elementary-script/master/resources/numix-circle.index.theme > /usr/share/icons/Numix-Circle/index.theme'
+echo ""
+echo "Downloading Elementary Plus icons config..."
+sleep 2
 sudo su -c 'curl https://raw.githubusercontent.com/michaldaniel/elementary-script/master/resources/elementay-plus.index.theme > /usr/share/icons/elementaryPlus/index.theme'
+echo ""
+echo "Downloading Ulltra Flat icons config..."
+sleep 2
 sudo su -c 'curl https://raw.githubusercontent.com/michaldaniel/elementary-script/master/resources/ultra-flat.index.theme > /usr/share/icons/Ultra-Flat/index.theme'
-sudo su -c 'rm /usr/share/icons/Ultra-Flat/devices/scalable/system.svg'
-sudo su -c 'rm /usr/share/icons/Ultra-Flat/places/scalable/mail*'
-sudo su -c 'rm /usr/share/icons/Ultra-Flat/places/scalable/stock_i*'
-sudo su -c 'rm /usr/share/icons/Ultra-Flat/places/scalable/stock_o*'
-sudo su -c 'rm /usr/share/icons/Ultra-Flat/places/scalable/stock_s*'
+sudo su -c 'rm /usr/share/icons/Ultra-Flat/devices/scalable/system.svg' &>/dev/null
+sudo su -c 'rm /usr/share/icons/Ultra-Flat/places/scalable/mail*' &>/dev/null
+sudo su -c 'rm /usr/share/icons/Ultra-Flat/places/scalable/stock_i*' &>/dev/null
+sudo su -c 'rm /usr/share/icons/Ultra-Flat/places/scalable/stock_o*' &>/dev/null
+sudo su -c 'rm /usr/share/icons/Ultra-Flat/places/scalable/stock_s*' &>/dev/null
+echo ""
+echo "Icons fixing completed."
