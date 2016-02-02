@@ -14,7 +14,7 @@ curl https://raw.githubusercontent.com/michaldaniel/elementary-script/master/ele
 
 ## elementary OS Version Compatibility
 
-elementary-script supports the lastest stable version of elementary OS, which at the moment is **elementary OS 0.3.1 Freya**.
+elementary-script supports the lastest stable version of elementary OS, which at the moment is **elementary OS 0.3.2 Freya**.
 
 ## Plans for the future
 
