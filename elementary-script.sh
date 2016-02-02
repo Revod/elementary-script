@@ -36,7 +36,7 @@ GUI=$(zenity --list --checklist \
 	FALSE "Install Extra Multimedia Codecs" "Installs extra multimedia codecs." \
 	FALSE "Install Support for Encrypted DVD's" "Installs support for playing encrypted DVD's." \
 	FALSE "Install Support for Archive Formats" "Installs support for archive formats." \
-	FALSE "Install GDebi" "Installs GDebi. A simple tool to install deb files." \
+	FALSE "Install Power Installer" "Installs Power Installer. A simple tool to install deb files." \
 	FALSE "Install Google Chrome" "Installs Google Chrome. A browser that combines a minimal design with sophisticated technology to make the web faster, safer, and easier." \
 	FALSE "Install Chromium" "Installs Chromium. An open-source browser project that aims to build a safer, faster, and more stable way for all Internet users to experience the web." \
 	FALSE "Install Firefox" "Installs Firefox. A free and open-source web browser." \
@@ -144,6 +144,10 @@ then
 	echo "Installing Extra Multimedia Codecs..."
 	echo ""
 	sudo apt-get -y install libavcodec-extra-54
+	sudo apt-add-repository -y ppa:mc3man/trusty-media
+	sudo apt-get -y update
+	sudo apt-get -y dist-upgrade
+	sudo apt-get -y install ffmpeg faac faad gstreamer0.10-ffmpeg x264 x265
 fi
 
 # Install Support for Encrypted DVD's Action
@@ -166,12 +170,15 @@ then
 fi
 
 # Install GDebi Action
-if [[ $GUI == *"Install GDebi"* ]]
+if [[ $GUI == *"Install Power Installer"* ]]
 then
 	clear
-	echo "Installing GDebi..."
+	echo "Installing Power Installer..."
 	echo ""
-	sudo apt-get -y install gdebi
+	
+	sudo add-apt-repository -y ppa:donadigo/power-installer
+	sudo apt-get -y update
+	sudo apt-get -y install power-installer
 fi
 
 # Install Google Chrome Action
@@ -180,15 +187,10 @@ then
 	clear
 	echo "Installing Google Chrome..."
 	echo ""
-	if [[ $(uname -m) == "i686" ]]
-	then
-		wget -O /tmp/google-chrome-stable_current_i386.deb https://dl.google.com/linux/direct/google-chrome-stable_current_i386.deb
-		sudo dpkg -i /tmp/google-chrome-stable_current_i386.deb
-	elif [[ $(uname -m) == "x86_64" ]]
-	then
-		wget -O /tmp/google-chrome-stable_current_amd64.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-		sudo dpkg -i /tmp/google-chrome-stable_current_amd64.deb
-	fi
+	wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add - 
+	sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
+	sudo apt-get -y update 
+	sudo apt-get -y install google-chrome-stable
 fi
 
 # Install Chromium
