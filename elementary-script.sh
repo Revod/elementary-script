@@ -186,7 +186,7 @@ then
 	echo "Installing Google Chrome..."
 	echo ""
 	wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add - 
-	sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
+	sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
 	sudo apt-get -y update 
 	sudo apt-get -y install google-chrome-stable
 fi
@@ -273,7 +273,7 @@ then
 	echo ""
 	sudo add-apt-repository -y ppa:libreoffice/ppa
 	sudo apt-get -y update
-	sudo apt-get -y install libreoffice
+	sudo apt-get -y install libreoffice libreoffice-style-breeze
 fi
 
 # Install Numix Circle Icons
@@ -404,7 +404,7 @@ then
 	clear
 	echo "Installing MEGASync client..."
 	echo ""
-	if [[ $(uname -m) == "i686" ]]
+	if [[ $(uname -m) == "i386" ]]
 	then
 		wget -O /tmp/megasync-xUbuntu_14.04_i386.deb https://mega.nz/linux/MEGAsync/xUbuntu_14.04/i386/megasync-xUbuntu_14.04_i386.deb
 		sudo dpkg -i /tmp/megasync-xUbuntu_14.04_i386.deb
@@ -745,7 +745,6 @@ then
 	echo "Installing Gnome media recorder..."
 	echo ""
 	sudo apt-get -y install gnome-media
-	gnome-sound-recorder
 fi
 
 # Install Trimage
