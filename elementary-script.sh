@@ -1,6 +1,25 @@
 # Clear the Terminal
 clear
 
+#Get user distribution
+distro=$(lsb_release -c | cut -f2)
+#Hardcoded target distribution Freya
+targetDistro=freya
+
+if [ "$distro" != "$targetDistro" ]; then
+  echo "This script wasn't created for your distribution."
+  echo "You are using $distro, this script was made for $targetDistro."
+  echo "If it doesn't seem right, check for updated version."
+  exit 1
+fi
+echo -----------------------------------------------------
+echo "I am not responsible for any damages that may occur from using this script!"
+echo "Please mind that this script will add new personal package archives."
+echo "The script will need root permissions to perform it's actions."
+echo -----------------------------------------------------
+sleep 4
+echo "   "
+echo "Drawing GUI..."
 # Zenity
 GUI=$(zenity --list --checklist \
 	--height 400 \
@@ -10,73 +29,75 @@ GUI=$(zenity --list --checklist \
 	--column=Picks \
 	--column=Actions \
 	--column=Description \
-	TRUE "Update System" "Updates the package lists, the system packages and Applications."  \
+	FALSE "Update System" "Updates the package lists, the system packages and Applications."  \
 	FALSE "Install Proprietary Drivers" "Installs the proprietary drivers."  \
-	TRUE "Speed-Up Memory" "Installs preload and enables zRAM." \
-	TRUE "Install Ubuntu Restricted Extras" "Installs commonly used applications with restricted copyright (mp3, avi, mpeg, TrueType, Java, Flash, Codecs)." \
-	TRUE "Install Extra Multimedia Codecs" "Installs extra multimedia codecs." \
-	TRUE "Install Support for Encrypted DVD's" "Installs support for playing encrypted DVD's." \
-	TRUE "Install Support for Archive Formats" "Installs support for archive formats." \
+	FALSE "Speed-Up Memory" "Installs preload and enables zRAM." \
+	FALSE "Install Ubuntu Restricted Extras" "Installs commonly used applications with restricted copyright (mp3, avi, mpeg, TrueType, Java, Flash, Codecs)." \
+	FALSE "Install Extra Multimedia Codecs" "Installs extra multimedia codecs." \
+	FALSE "Install Support for Encrypted DVD's" "Installs support for playing encrypted DVD's." \
+	FALSE "Install Support for Archive Formats" "Installs support for archive formats." \
 	FALSE "Install GDebi" "Installs GDebi. A simple tool to install deb files." \
-	TRUE "Install Google Chrome" "Installs Google Chrome. A browser that combines a minimal design with sophisticated technology to make the web faster, safer, and easier." \
+	FALSE "Install Google Chrome" "Installs Google Chrome. A browser that combines a minimal design with sophisticated technology to make the web faster, safer, and easier." \
 	FALSE "Install Chromium" "Installs Chromium. An open-source browser project that aims to build a safer, faster, and more stable way for all Internet users to experience the web." \
-	TRUE "Install Firefox" "Installs Firefox. A free and open-source web browser." \
+	FALSE "Install Firefox" "Installs Firefox. A free and open-source web browser." \
 	FALSE "Install Liferea" "Installs Liferea. a web feed reader/news aggregator that brings together all of the content from your favorite subscriptions into a simple interface that makes it easy to organize and browse feeds. Its GUI is similar to a desktop mail/newsclient, with an embedded graphical browser." \
-	TRUE "Install VLC" "Installs VLC. A free and open source cross-platform multimedia player and framework that plays most multimedia files as well as DVDs, Audio CDs, VCDs, and various streaming protocols." \
-	TRUE "Install Transmission" "Installs the Transmission BitTorrent client." \
-	TRUE "Install Atom" "Installs Atom. A hackable text editor for the 21st Century." \
+	FALSE "Install VLC" "Installs VLC. A free and open source cross-platform multimedia player and framework that plays most multimedia files as well as DVDs, Audio CDs, VCDs, and various streaming protocols." \
+	FALSE "Install Transmission" "Installs the Transmission BitTorrent client." \
+	FALSE "Install Atom" "Installs Atom. A hackable text editor for the 21st Century." \
 	FALSE "Install Sublime Text 3" "Installs Sublime Text 3. A sophisticated text editor for code, markup and prose." \
-	TRUE "Install LibreOffice" "Installs LibreOffice. A powerful office suite." \
-	TRUE "Install Numix Circle icon theme" "Add action description later..." \
-	TRUE "Install Elementary tweaks" "Add action description later..." \
-	TRUE "Install additional plank themes" "Add action description later..." \
-	TRUE "Install Indicator USB" "Add action description later..." \
-	TRUE "Install Indicator Multiload" "Add action description later..." \
-	TRUE "Install Y PPA Manager" "Add action description later..." \
-	TRUE "Install f.lux" "Add action description later..." \
-	TRUE "Install Gnome system monitor" "Add action description later..." \
-	TRUE "Install Caffeine" "Add action description later..." \
-	TRUE "Install Copyq" "Add action description later..." \
-	TRUE "Install Gnome ENCFS manager" "Add action description later..." \
-	TRUE "Install MEGASync client" "Add action description later..." \
-	TRUE "Install Currency" "Add action description later..." \
-	TRUE "Install Gnome disk utility" "Add action description later..." \
-	TRUE "Install Configurator" "Add action description later..." \
-	TRUE "Install MenuLibre" "Add action description later..." \
-	TRUE "Install ElementaryPlus icons" "Add action description later..." \
-	TRUE "Install Gimp" "Add action description later..." \
-	TRUE "Install Envelope" "Add action description later..." \
-	TRUE "Install Webby" "Add action description later..." \
-	TRUE "Install FileZilla" "Add action description later..." \
-	TRUE "Install FreshPlayerPlugin" "Add action description later..." \
-	TRUE "Install Keys and Passwords" "Add action description later..." \
-	TRUE "Install Inkscape" "Add action description later..." \
-	TRUE "Install Remmina" "Add action description later..." \
-	TRUE "Install Gnome maps" "Add action description later..." \
-	TRUE "Install Mark my words" "Add action description later..." \
-	TRUE "Install Mumble" "Add action description later..." \
-	TRUE "Install Brasero" "Add action description later..." \
-	TRUE "Install NaSC" "Add action description later..." \
-	TRUE "Install Pinta" "Add action description later..." \
-	TRUE "Install SmartGit" "Add action description later..." \
-	TRUE "Install Spotify" "Add action description later..." \
-	TRUE "Install Tomato" "Add action description later..." \
-	TRUE "Install Vocal" "Add action description later..." \
-	TRUE "Install Relay" "Add action description later..." \
-	TRUE "Install Imgur contract" "Add action description later..." \
-	TRUE "Install Hourglass" "Add action description later..." \
-	TRUE "Install Steam" "Add action description later..." \
-	TRUE "Install Ubuntu make" "Add action description later..." \
-	TRUE "Install Simple screen recorder" "Add action description later..." \
-	TRUE "Install Cheese" "Add action description later..." \
-	TRUE "Install Gnome media recorder" "Add action description later..." \
-	TRUE "Install Trimage" "Add action description later..." \
-	TRUE "Install GPick" "Add action description later..." \
-	TRUE "Combine elementaryPlus and Numic icon sets" "Add action description later..." \
-	TRUE "Fix Broken Packages" "Fixes the broken packages." \
-	TRUE "Clean-Up Junk" "Removes unnecessary packages and the local repository of retrieved package files." \
-	TRUE "Post-install system update" "Update the package list, the system packages and Applications." \
+	FALSE "Install LibreOffice" "Installs LibreOffice. A powerful office suite." \
+	FALSE "Install Numix Circle icon theme" "Add action description later..." \
+	FALSE "Install Elementary tweaks" "Add action description later..." \
+	FALSE "Install additional plank themes" "Add action description later..." \
+	FALSE "Install Indicator USB" "Add action description later..." \
+	FALSE "Install Indicator Multiload" "Add action description later..." \
+	FALSE "Install Y PPA Manager" "Add action description later..." \
+	FALSE "Install f.lux" "Add action description later..." \
+	FALSE "Install Gnome system monitor" "Add action description later..." \
+	FALSE "Install Caffeine" "Add action description later..." \
+	FALSE "Install Copyq" "Add action description later..." \
+	FALSE "Install Gnome ENCFS manager" "Add action description later..." \
+	FALSE "Install MEGASync client" "Add action description later..." \
+	FALSE "Install Currency" "Add action description later..." \
+	FALSE "Install Gnome disk utility" "Add action description later..." \
+	FALSE "Install Configurator" "Add action description later..." \
+	FALSE "Install MenuLibre" "Add action description later..." \
+	FALSE "Install ElementaryPlus icons" "Add action description later..." \
+	FALSE "Install Gimp" "Add action description later..." \
+	FALSE "Install Envelope" "Add action description later..." \
+	FALSE "Install Webby" "Add action description later..." \
+	FALSE "Install FileZilla" "Add action description later..." \
+	FALSE "Install FreshPlayerPlugin" "Add action description later..." \
+	FALSE "Install Keys and Passwords" "Add action description later..." \
+	FALSE "Install Inkscape" "Add action description later..." \
+	FALSE "Install Remmina" "Add action description later..." \
+	FALSE "Install Gnome maps" "Add action description later..." \
+	FALSE "Install Mark my words" "Add action description later..." \
+	FALSE "Install Mumble" "Add action description later..." \
+	FALSE "Install Brasero" "Add action description later..." \
+	FALSE "Install NaSC" "Add action description later..." \
+	FALSE "Install Pinta" "Add action description later..." \
+	FALSE "Install SmartGit" "Add action description later..." \
+	FALSE "Install Spotify" "Add action description later..." \
+	FALSE "Install Tomato" "Add action description later..." \
+	FALSE "Install Vocal" "Add action description later..." \
+	FALSE "Install Relay" "Add action description later..." \
+	FALSE "Install Imgur contract" "Add action description later..." \
+	FALSE "Install Hourglass" "Add action description later..." \
+	FALSE "Install Steam" "Add action description later..." \
+	FALSE "Install Ubuntu make" "Add action description later..." \
+	FALSE "Install Simple screen recorder" "Add action description later..." \
+	FALSE "Install Cheese" "Add action description later..." \
+	FALSE "Install Gnome media recorder" "Add action description later..." \
+	FALSE "Install Trimage" "Add action description later..." \
+	FALSE "Install GPick" "Add action description later..." \
+	FALSE "Combine elementaryPlus and Numic icon sets" "Add action description later..." \
+	FALSE "Fix Broken Packages" "Fixes the broken packages." \
+	FALSE "Clean-Up Junk" "Removes unnecessary packages and the local repository of retrieved package files." \
+	FALSE "Post-install system update" "Update the package list, the system packages and Applications." \
 	--separator=', ');
+
+clear
 
 # Update System Action
 if [[ $GUI == *"Update System"* ]]
@@ -94,7 +115,7 @@ then
 	clear
 	echo "Installing Proprietary Drivers..."
 	echo ""
-	sudo jockey-gtk
+	sudo software-properties-gtk --open-tab=4
 fi
 
 # Speed-Up Memory Action
@@ -337,7 +358,7 @@ then
 	sudo add-apt-repository -y ppa:gnome3-team/gnome3
 	sudo apt-get -y update
 	sudo apt-get -y install gnome-system-monitor
-	sudo add-apt-repository -y --remove ppa:whatever/ppa
+	sudo add-apt-repository -y --remove ppa:gnome3-team/gnome3
 	sudo apt-get -y update
 fi
 
@@ -778,3 +799,4 @@ fi
 # Notification
 clear
 notify-send -i utilities-terminal elementary-script "All tasks ran successfully!"
+exit 0
