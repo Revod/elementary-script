@@ -25,28 +25,28 @@ GUI=$(zenity --list --checklist \
 	--height 400 \
 	--width 800 \
 	--title="elementary-script" \
-	--text "Pick one or multiple Actions to execute." \
+	--text "Pick one or multiple actions to execute." \
 	--column=Picks \
 	--column=Actions \
 	--column=Description \
-	FALSE "Update System" "Updates the package lists, the system packages and Applications."  \
-	FALSE "Install Proprietary Drivers" "Installs the proprietary drivers."  \
-	FALSE "Speed-Up Memory" "Installs preload and enables zRAM." \
-	FALSE "Install Ubuntu Restricted Extras" "Installs commonly used applications with restricted copyright (mp3, avi, mpeg, TrueType, Java, Flash, Codecs)." \
-	FALSE "Install Extra Multimedia Codecs" "Installs extra multimedia codecs." \
-	FALSE "Install Support for Encrypted DVD's" "Installs support for playing encrypted DVD's." \
-	FALSE "Install Support for Archive Formats" "Installs support for archive formats." \
+	TRUE "Update System" "Updates the package lists, the system packages and Applications."  \
+	TRUE "Install Proprietary Drivers" "Installs the proprietary drivers."  \
+	TRUE "Speed-Up Memory" "Installs preload and enables zRAM." \
+	TRUE "Install Ubuntu Restricted Extras" "Installs commonly used applications with restricted copyright (mp3, avi, mpeg, TrueType, Java, Flash, Codecs)." \
+	TRUE "Install Extra Multimedia Codecs" "Installs extra multimedia codecs." \
+	TRUE "Install Support for Encrypted DVD's" "Installs support for playing encrypted DVD's." \
+	TRUE "Install Support for Archive Formats" "Installs support for archive formats." \
 	FALSE "Install Power Installer" "Installs Power Installer. A simple tool to install deb files." \
 	FALSE "Install Google Chrome" "Installs Google Chrome. A browser that combines a minimal design with sophisticated technology to make the web faster, safer, and easier." \
 	FALSE "Install Chromium" "Installs Chromium. An open-source browser project that aims to build a safer, faster, and more stable way for all Internet users to experience the web." \
 	FALSE "Install Firefox" "Installs Firefox. A free and open-source web browser." \
-	FALSE "Install Liferea" "Installs Liferea. a web feed reader/news aggregator that brings together all of the content from your favorite subscriptions into a simple interface that makes it easy to organize and browse feeds. Its GUI is similar to a desktop mail/newsclient, with an embedded graphical browser." \
+	FALSE "Install FeedReader" "Installs FeedReader. a web feed reader/news aggregator that brings together all of the content from your favorite subscriptions into a simple interface that makes it easy to organize and browse feeds. Its GUI is similar to a desktop mail/newsclient, with an embedded graphical browser." \
 	FALSE "Install VLC" "Installs VLC. A free and open source cross-platform multimedia player and framework that plays most multimedia files as well as DVDs, Audio CDs, VCDs, and various streaming protocols." \
 	FALSE "Install Transmission" "Installs the Transmission BitTorrent client." \
 	FALSE "Install Atom" "Installs Atom. A hackable text editor for the 21st Century." \
 	FALSE "Install Sublime Text 3" "Installs Sublime Text 3. A sophisticated text editor for code, markup and prose." \
 	FALSE "Install LibreOffice" "Installs LibreOffice. A powerful office suite." \
-	FALSE "Install Numix Circle icon theme" "Add action description later..." \
+	FALSE "Install Numix Circle Icons" "Add action description later..." \
 	FALSE "Install Elementary tweaks" "Add action description later..." \
 	FALSE "Install additional plank themes" "Add action description later..." \
 	FALSE "Install Indicator USB" "Add action description later..." \
@@ -92,9 +92,9 @@ GUI=$(zenity --list --checklist \
 	FALSE "Install Trimage" "Add action description later..." \
 	FALSE "Install GPick" "Add action description later..." \
 	FALSE "Combine elementaryPlus and Numic icon sets" "Add action description later..." \
-	FALSE "Fix Broken Packages" "Fixes the broken packages." \
-	FALSE "Clean-Up Junk" "Removes unnecessary packages and the local repository of retrieved package files." \
-	FALSE "Post-install system update" "Update the package list, the system packages and Applications." \
+	TRUE "Fix Broken Packages" "Fixes the broken packages." \
+	TRUE "Clean-Up Junk" "Removes unnecessary packages and the local repository of retrieved package files." \
+	TRUE "Post-install system update" "Update the package list, the system packages and Applications." \
 	--separator=', ');
 
 clear
@@ -132,7 +132,7 @@ fi
 if [[ $GUI == *"Install Ubuntu Restricted Extras"* ]]
 then
 	clear
-	echo "Installing Ubuntu Restricted Extras..."
+	echo "Installing Ubuntu Restricted Extras - input will be required..."
 	echo ""
 	sudo apt-get -y install ubuntu-restricted-extras
 fi
@@ -169,13 +169,12 @@ then
 	sudo apt-get -y install zip unzip p7zip p7zip-rar rar unrar
 fi
 
-# Install GDebi Action
+# Install Power Installer Action
 if [[ $GUI == *"Install Power Installer"* ]]
 then
 	clear
 	echo "Installing Power Installer..."
 	echo ""
-	
 	sudo add-apt-repository -y ppa:donadigo/power-installer
 	sudo apt-get -y update
 	sudo apt-get -y install power-installer
@@ -212,13 +211,15 @@ then
 	sudo apt-get -y install ttf-lyx
 fi
 
-# Install Liferea Action
-if [[ $GUI == *"Install Liferea"* ]]
+# Install FeedReader Action
+if [[ $GUI == *"Install FeedReader"* ]]
 then
 	clear
-	echo "Installing Liferea..."
+	echo "Installing FeedReader..."
 	echo ""
-	sudo apt-get -y install liferea
+	sudo add-apt-repository -y ppa:eviltwin1/feedreader-stable
+	sudo apt-get -y update
+	sudo apt-get install -y feedreader
 fi
 
 # Install VLC Action
@@ -276,11 +277,11 @@ then
 	sudo apt-get -y install libreoffice
 fi
 
-# Install Numix Circle icon theme
-if [[ $GUI == *"Install Numix Circle icon theme"* ]]
+# Install Numix Circle Icons
+if [[ $GUI == *"Install Numix Circle Icons"* ]]
 then
 	clear
-	echo "Installing Numix Circle icon theme..."
+	echo "Installing Numix Circle Icons..."
 	echo ""
 	sudo apt-add-repository -y ppa:numix/ppa
 	sudo apt-get -y update
@@ -293,7 +294,7 @@ then
 	clear
 	echo "Installing Elementary tweaks..."
 	echo ""
-	curl -sL  http://i-hate-farms.github.io/spores/install | sudo bash - 
+	curl -sL  'http://i-hate-farms.github.io/spores/install' | sudo bash - 
 	sudo apt-get -y install elementary-tweaks
 fi
 
@@ -305,6 +306,7 @@ then
 	echo ""
 	wget -O /tmp/elementary-plank-themes_0.4-0%7E4%7Eubuntu0.3.1_all.deb https://launchpad.net/~versable/+archive/ubuntu/elementary-tweaks-isis/+files/elementary-plank-themes_0.4-0%7E4%7Eubuntu0.3.1_all.deb
 	sudo dpkg -i /tmp/elementary-plank-themes_0.4-0%7E4%7Eubuntu0.3.1_all.deb
+	sudo apt-get install -f
 fi
 
 # Install Indicator USB
@@ -370,7 +372,7 @@ then
 	clear
 	echo "Installing Caffeine..."
 	echo ""
-	sudo add-apt-repository -y ppa:noobslab/indicators
+	sudo add-apt-repository -y ppa:caffeine-developers/ppa
 	sudo apt-get -y update
 	sudo apt-get -y install caffeine
 fi
@@ -412,6 +414,7 @@ then
 		wget -O /tmp/megasync-xUbuntu_14.04_amd64.deb https://mega.nz/linux/MEGAsync/xUbuntu_14.04/amd64/megasync-xUbuntu_14.04_amd64.deb
 		sudo dpkg -i /tmp/megasync-xUbuntu_14.04_amd64.deb
 	fi
+	sudo apt-get install -f
 fi
 
 # Install Currency
@@ -431,7 +434,11 @@ then
 	clear
 	echo "Installing Gnome disk utility..."
 	echo ""
+	sudo add-apt-repository -y ppa:gnome3-team/gnome3
+	sudo apt-get -y update
 	sudo apt-get -y install gnome-disk-utility 
+	sudo add-apt-repository -y --remove ppa:gnome3-team/gnome3
+	sudo apt-get -y update
 fi
 
 # Install Configurator
@@ -520,6 +527,7 @@ then
 	sudo add-apt-repository -y ppa:nilarimogard/webupd8
 	sudo apt-get -y update
 	sudo apt-get -y install freshplayerplugin
+	sudo apt-get -y remove flashplugin-installer
 fi
 
 # Install Keys and Passwords
@@ -630,7 +638,7 @@ then
 	clear
 	echo "Installing Spotify - input will we required"
 	echo ""
-	sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys D2C19886
+	sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys BBEBDCB318AD50EC6865090613B00F1FD2C19886
 	echo deb http://repository.spotify.com stable non-free | sudo tee /etc/apt/sources.list.d/spotify.list
 	sudo apt-get -y update
 	sudo apt-get -y install spotify-client
@@ -664,9 +672,9 @@ then
 	clear
 	echo "Installing Relay..."
 	echo ""
-	sudo add-apt-repository -y ppa:agronick/ppa
-	sudo apt-get -y update
-	sudo apt-get -y install relay
+	sudo apt-add-repository -y ppa:agronick/relay
+    sudo apt-get -y update
+    sudo apt-get -y install relay
 fi
 
 # Install Imgur contract
@@ -738,6 +746,7 @@ then
 	echo "Installing Gnome media recorder..."
 	echo ""
 	sudo apt-get -y install gnome-media
+	gnome-sound-recorder
 fi
 
 # Install Trimage
@@ -802,3 +811,24 @@ fi
 clear
 notify-send -i utilities-terminal elementary-script "All tasks ran successfully!"
 exit 0
+
+#Footnote
+#Nowy copier
+#My paint
+#Insync
+#Java
+#Silverlight
+#Fonts
+#Arc theme
+#Go for it
+#Skype
+#Optimize for battery laptops
+#Indicator Workspaces
+#Indicator Terminal
+#Lollypop music player
+#Corebird
+#eRadio
+#Copyq - > Glipper
+#Piviti
+#RecordMyDesktop
+#https://github.com/Havoqq/elementary-script/blob/master/elementary-script.sh
