@@ -306,7 +306,7 @@ then
 	echo ""
 	wget -O /tmp/elementary-plank-themes_0.4-0%7E4%7Eubuntu0.3.1_all.deb https://launchpad.net/~versable/+archive/ubuntu/elementary-tweaks-isis/+files/elementary-plank-themes_0.4-0%7E4%7Eubuntu0.3.1_all.deb
 	sudo dpkg -i /tmp/elementary-plank-themes_0.4-0%7E4%7Eubuntu0.3.1_all.deb
-	sudo apt-get install -f
+	sudo apt-get install -f -y
 fi
 
 # Install Indicator USB
@@ -414,7 +414,7 @@ then
 		wget -O /tmp/megasync-xUbuntu_14.04_amd64.deb https://mega.nz/linux/MEGAsync/xUbuntu_14.04/amd64/megasync-xUbuntu_14.04_amd64.deb
 		sudo dpkg -i /tmp/megasync-xUbuntu_14.04_amd64.deb
 	fi
-	sudo apt-get install -f
+	sudo apt-get install -f -y
 fi
 
 # Install Currency
@@ -831,4 +831,6 @@ exit 0
 #Copyq - > Glipper
 #Piviti
 #RecordMyDesktop
+#Add ultra flat icons, remove super flat
+#Replace combine
 #https://github.com/Havoqq/elementary-script/blob/master/elementary-script.sh
