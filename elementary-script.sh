@@ -22,7 +22,7 @@ echo "   "
 echo "Drawing GUI..."
 # Zenity
 GUI=$(zenity --list --checklist \
-	--height 400 \
+	--height 560 \
 	--width 800 \
 	--title="elementary-script" \
 	--text "Pick one or multiple actions to execute." \
@@ -36,6 +36,7 @@ GUI=$(zenity --list --checklist \
 	TRUE "Install Extra Multimedia Codecs" "Installs extra multimedia codecs." \
 	TRUE "Install Support for Encrypted DVD's" "Installs support for playing encrypted DVD's." \
 	TRUE "Install Support for Archive Formats" "Installs support for archive formats." \
+	FALSE "Optimise battery performance" "Add action description later..." \
 	FALSE "Install Power Installer" "Installs Power Installer. A simple tool to install deb files." \
 	FALSE "Install Google Chrome" "Installs Google Chrome. A browser that combines a minimal design with sophisticated technology to make the web faster, safer, and easier." \
 	FALSE "Install Chromium" "Installs Chromium. An open-source browser project that aims to build a safer, faster, and more stable way for all Internet users to experience the web." \
@@ -190,6 +191,21 @@ then
 	notify-send -i utilities-terminal elementary-script "Support for Archive Formats installed successfully!"
 fi
 
+
+# Optimise battery performance Action
+if [[ $GUI == *"Optimise battery performance"* ]]
+then
+	clear
+	echo "Optimising battery performance..."
+	echo ""
+	sudo add-apt-repository -y ppa:linrunner/tlp
+	sudo apt-get -y update
+	sudo apt-get -y install tlp tlp-rdw
+	sudo tlp start
+	sudo apt-get -y install thermald
+	notify-send -i utilities-terminal elementary-script "Optimise battery performance ran successfully!"
+fi
+
 # Install Power Installer Action
 if [[ $GUI == *"Install Power Installer"* ]]
 then
@@ -296,7 +312,7 @@ then
 	notify-send -i utilities-terminal elementary-script "Sublime Text 3 installed successfully!"
 fi
 
-# Install LibreOffice
+# Install LibreOffice Action
 if [[ $GUI == *"Install LibreOffice"* ]]
 then
 	clear
@@ -308,7 +324,7 @@ then
 	notify-send -i utilities-terminal elementary-script "LibreOffice installed successfully!"
 fi
 
-# Install Numix Circle Icons
+# Install Numix Circle Icons Action
 if [[ $GUI == *"Install Numix Circle Icons"* ]]
 then
 	clear
@@ -320,7 +336,7 @@ then
 	notify-send -i utilities-terminal elementary-script "Numix Circle Icons installed successfully!"
 fi
 
-# Install Elementary tweaks
+# Install Elementary tweaks Action
 if [[ $GUI == *"Install Elementary tweaks"* ]]
 then
 	clear
@@ -331,7 +347,7 @@ then
 	notify-send -i utilities-terminal elementary-script "Elementary tweaks installed successfully!"
 fi
 
-# Install additional plank themes
+# Install additional plank themes Action
 if [[ $GUI == *"Install additional plank themes"* ]]
 then
 	clear
@@ -343,7 +359,7 @@ then
 	notify-send -i utilities-terminal elementary-script "Additional plank themes installed successfully!"
 fi
 
-# Install Indicator USB
+# Install Indicator USB Action
 if [[ $GUI == *"Install Indicator USB"* ]]
 then
 	clear
@@ -355,7 +371,7 @@ then
 	notify-send -i utilities-terminal elementary-script "Indicator USB installed successfully!"
 fi
 
-# Install Indicator Multiload
+# Install Indicator Multiload Action
 if [[ $GUI == *"Install Indicator Multiload"* ]]
 then
 	clear
@@ -367,7 +383,7 @@ then
 	notify-send -i utilities-terminal elementary-script "Indicator Multiload installed successfully!"
 fi
 
-# Install Y PPA Manager
+# Install Y PPA Manager Action
 if [[ $GUI == *"Install Y PPA Manager"* ]]
 then
 	clear
@@ -379,7 +395,7 @@ then
 	notify-send -i utilities-terminal elementary-script "Y PPA Manager installed successfully!"
 fi
 
-# Install f.lux
+# Install f.lux Action
 if [[ $GUI == *"Install f.lux"* ]]
 then
 	clear
@@ -391,7 +407,7 @@ then
 	notify-send -i utilities-terminal elementary-script "f.lux installed successfully!"
 fi
 
-# Install Gnome system monitor
+# Install Gnome system monitor Action
 if [[ $GUI == *"Install Gnome system monitor"* ]]
 then
 	clear
@@ -405,7 +421,7 @@ then
 	notify-send -i utilities-terminal elementary-script "Gnome system monitor installed successfully!"
 fi
 
-# Install Caffeine
+# Install Caffeine Action
 if [[ $GUI == *"Install Caffeine"* ]]
 then
 	clear
@@ -417,7 +433,7 @@ then
 	notify-send -i utilities-terminal elementary-script "Caffeine installed successfully!"
 fi
 
-# Install Glipper
+# Install Glipper Action
 if [[ $GUI == *"Install Glipper"* ]]
 then
 	clear
@@ -427,7 +443,7 @@ then
 	notify-send -i utilities-terminal elementary-script "Glipper installed successfully!"
 fi
 
-# Install Gnome ENCFS manager
+# Install Gnome ENCFS manager Action
 if [[ $GUI == *"Install Gnome ENCFS manager"* ]]
 then
 	clear
@@ -439,7 +455,7 @@ then
 	notify-send -i utilities-terminal elementary-script "Gnome ENCFS manager installed successfully!"
 fi
 
-# Install MEGASync client
+# Install MEGASync client Action
 if [[ $GUI == *"Install MEGASync client"* ]]
 then
 	clear
@@ -458,7 +474,7 @@ then
 	notify-send -i utilities-terminal elementary-script "MEGASync client installed successfully!"
 fi
 
-# Install Insync
+# Install Insync Action
 if [[ $GUI == *"Install Insync"* ]]
 then
 	clear
@@ -471,7 +487,7 @@ then
 	notify-send -i utilities-terminal elementary-script "Insync client installed successfully!"
 fi
 
-# Install Currency
+# Install Currency Action
 if [[ $GUI == *"Install Currency"* ]]
 then
 	clear
@@ -483,7 +499,7 @@ then
 	notify-send -i utilities-terminal elementary-script "Currency installed successfully!"
 fi
 
-# Install Gnome disk utility
+# Install Gnome disk utility Action
 if [[ $GUI == *"Install Gnome disk utility"* ]]
 then
 	clear
@@ -497,7 +513,7 @@ then
 	notify-send -i utilities-terminal elementary-script "Gnome disk utility installed successfully!"
 fi
 
-# Install Configurator
+# Install Configurator Action
 if [[ $GUI == *"Install Configurator"* ]]
 then
 	clear
@@ -508,8 +524,8 @@ then
 	sudo apt-get -y install configurator
 	notify-send -i utilities-terminal elementary-script "Configurator installed successfully!"
 fi
-
-# Install MenuLibre
+aptik
+# Install MenuLibre Action
 if [[ $GUI == *"Install MenuLibre"* ]]
 then
 	clear
@@ -521,7 +537,7 @@ then
 	notify-send -i utilities-terminal elementary-script "MenuLibre installed successfully!"
 fi
 
-# Install ElementaryPlus icons
+# Install ElementaryPlus icons Action
 if [[ $GUI == *"Install ElementaryPlus icons"* ]]
 then
 	clear
@@ -533,7 +549,7 @@ then
 	notify-send -i utilities-terminal elementary-script "ElementaryPlus icons installed successfully!"
 fi
 
-# Install Ultra flat icons
+# Install Ultra flat icons Action
 if [[ $GUI == *"Install Ultra flat icons"* ]]
 then
 	clear
@@ -545,7 +561,7 @@ then
 	notify-send -i utilities-terminal elementary-script "Ultra flat icons installed successfully!"
 fi
 
-# Install Arc Theme
+# Install Arc Theme Actionaptik
 if [[ $GUI == *"Install Arc Theme"* ]]
 then
 	clear
@@ -561,7 +577,7 @@ then
 	notify-send -i utilities-terminal elementary-script "Arc Theme installed successfully!"
 fi
 
-# Install Gimp
+# Install Gimp Action
 if [[ $GUI == *"Install Gimp"* ]]
 then
 	clear
@@ -573,7 +589,7 @@ then
 	notify-send -i utilities-terminal elementary-script "Gimp installed successfully!"
 fi
 
-# Install Envelope
+# Install Envelope Action
 if [[ $GUI == *"Install Envelope"* ]]
 then
 	clear
@@ -585,7 +601,7 @@ then
 	notify-send -i utilities-terminal elementary-script "Envelope installed successfully!"
 fi
 
-# Install Webby
+# Install Webby Action
 if [[ $GUI == *"Install Webby"* ]]
 then
 	clear
@@ -597,7 +613,7 @@ then
 	notify-send -i utilities-terminal elementary-script "Webby installed successfully!"
 fi
 
-# Install FileZilla
+# Install FileZilla Action
 if [[ $GUI == *"Install FileZilla"* ]]
 then
 	clear
@@ -609,7 +625,7 @@ then
 	notify-send -i utilities-terminal elementary-script "FileZilla installed successfully!"
 fi
 
-# Install FreshPlayerPlugin
+# Install FreshPlayerPlugin Action
 if [[ $GUI == *"Install FreshPlayerPlugin"* ]]
 then
 	clear
@@ -622,7 +638,7 @@ then
 	notify-send -i utilities-terminal elementary-script "FreshPlayerPlugin installed successfully!"
 fi
 
-# Install Oracle Java 8
+# Install Oracle Java 8 Action
 if [[ $GUI == *"Install Oracle Java 8"* ]]
 then
 	clear
@@ -634,7 +650,7 @@ then
 	notify-send -i utilities-terminal elementary-script "Oracle Java 8 installed successfully!"
 fi
 
-# Install Pipelight Silverlight
+# Install Pipelight Silverlight Action
 if [[ $GUI == *"Install Pipelight Silverlight"* ]]
 then
 	clear
@@ -649,7 +665,7 @@ then
 fi
 
 
-# Install Infinality
+# Install Infinality Action
 if [[ $GUI == *"Install Infinality"* ]]
 then
 	clear
@@ -664,7 +680,7 @@ then
 	notify-send -i utilities-terminal elementary-script "Infinality installed successfully!"
 fi
 
-# Install Keys and Passwords
+# Install Keys and Passwords Action
 if [[ $GUI == *"Install Keys and Passwords"* ]]
 then
 	clear
@@ -674,7 +690,7 @@ then
 	notify-send -i utilities-terminal elementary-script "Keys and Passwords installed successfully!"
 fi
 
-# Install Inkscape
+# Install Inkscape Action
 if [[ $GUI == *"Install Inkscape"* ]]
 then
 	clear
@@ -686,7 +702,7 @@ then
 	notify-send -i utilities-terminal elementary-script "Inkscape installed successfully!"
 fi
 
-# Install Remmina
+# Install Remmina Action
 if [[ $GUI == *"Install Remmina"* ]]
 then
 	clear
@@ -696,7 +712,7 @@ then
 	notify-send -i utilities-terminal elementary-script "Remmina installed successfully!"
 fi
 
-# Install Gnome maps
+# Install Gnome maps Action
 if [[ $GUI == *"Install Gnome maps"* ]]
 then
 	clear
@@ -706,7 +722,7 @@ then
 	notify-send -i utilities-terminal elementary-script "Gnome maps installed successfully!"
 fi
 
-# Install Mark my words
+# Install Mark my words Action
 if [[ $GUI == *"Install Mark my words"* ]]
 then
 	clear
@@ -718,7 +734,7 @@ then
 	notify-send -i utilities-terminal elementary-script "Mark my words installed successfully!"
 fi
 
-# Install Mumble
+# Install Mumble Action
 if [[ $GUI == *"Install Mumble"* ]]
 then
 	clear
@@ -730,7 +746,7 @@ then
 	notify-send -i utilities-terminal elementary-script "Mumble installed successfully!"
 fi
 
-# Install Brasero
+# Install Brasero Action
 if [[ $GUI == *"Install Brasero"* ]]
 then
 	clear
@@ -740,7 +756,7 @@ then
 	notify-send -i utilities-terminal elementary-script "Brasero installed successfully!"
 fi
 
-# Install NaSC
+# Install NaSC Action
 if [[ $GUI == *"Install NaSC"* ]]
 then
 	clear
@@ -752,7 +768,7 @@ then
 	notify-send -i utilities-terminal elementary-script "NaSC installed successfully!"
 fi
 
-# Install Pinta
+# Install Pinta Action
 if [[ $GUI == *"Install Pinta"* ]]
 then
 	clear
@@ -764,7 +780,7 @@ then
 	notify-send -i utilities-terminal elementary-script "Pinta installed successfully!"
 fi
 
-# Install MyPaint
+# Install MyPaint Action
 if [[ $GUI == *"Install MyPaint"* ]]
 then
 	clear
@@ -776,7 +792,7 @@ then
 	notify-send -i utilities-terminal elementary-script "MyPaint installed successfully!"
 fi
 
-# Install SmartGit
+# Install SmartGit Action
 if [[ $GUI == *"Install SmartGit"* ]]
 then
 	clear
@@ -788,7 +804,7 @@ then
 	notify-send -i utilities-terminal elementary-script "SmartGit installed successfully!"
 fi
 
-# Install Spotify
+# Install Spotify Action
 if [[ $GUI == *"Install Spotify"* ]]
 then
 	clear
@@ -801,7 +817,7 @@ then
 	notify-send -i utilities-terminal elementary-script "Spotify installed successfully!"
 fi
 
-# Install Tomato
+# Install Tomato Action
 if [[ $GUI == *"Install Tomato"* ]]
 then
 	clear
@@ -813,7 +829,7 @@ then
 	notify-send -i utilities-terminal elementary-script "Tomato installed successfully!"
 fi
 
-# Install Tomato
+# Install Go For It! Action
 if [[ $GUI == *"Install Go For It!"* ]]
 then
 	clear
@@ -825,7 +841,7 @@ then
 	notify-send -i utilities-terminal elementary-script "Go For It! installed successfully!"
 fi
 
-# Install Vocal
+# Install Vocal Action
 if [[ $GUI == *"Install Vocal"* ]]
 then
 	clear
@@ -837,7 +853,7 @@ then
 	notify-send -i utilities-terminal elementary-script "Vocal installed successfully!"
 fi
 
-# Install Footnote
+# Install Footnote Action
 if [[ $GUI == *"Install Footnote"* ]]
 then
 	clear
@@ -851,7 +867,7 @@ then
 	notify-send -i utilities-terminal elementary-script "Footnote installed successfully!"
 fi
 
-# Install Relay
+# Install Relay Action
 if [[ $GUI == *"Install Relay"* ]]
 then
 	clear
@@ -863,7 +879,7 @@ then
 	notify-send -i utilities-terminal elementary-script "Relay installed successfully!"
 fi
 
-# Install Skype
+# Install Skype Action
 if [[ $GUI == *"Install Skype"* ]]
 then
 	clear
@@ -874,7 +890,7 @@ then
 	notify-send -i utilities-terminal elementary-script "Skype installed successfully!"
 fi
 
-# Install Telegram
+# Install Telegram Action
 if [[ $GUI == *"Install Telegram"* ]]
 then
 	clear
@@ -886,7 +902,7 @@ then
 	notify-send -i utilities-terminal elementary-script "Telegram installed successfully!"
 fi
 
-# Install Imgur contract
+# Install Imgur contract Action
 if [[ $GUI == *"Install Imgur contract"* ]]
 then
 	clear
@@ -898,7 +914,7 @@ then
 	notify-send -i utilities-terminal elementary-script "Imgur contract installed successfully!"
 fi
 
-# Install Hourglass
+# Install Hourglass Action
 if [[ $GUI == *"Install Hourglass"* ]]
 then
 	clear
@@ -910,7 +926,7 @@ then
 	notify-send -i utilities-terminal elementary-script "Hourglass installed successfully!"
 fi
 
-# Install Steam
+# Install Steam Action
 if [[ $GUI == *"Install Steam"* ]]
 then
 	clear
@@ -920,7 +936,7 @@ then
 	notify-send -i utilities-terminal elementary-script "Steam installed successfully!"
 fi
 
-# Install Ubuntu make
+# Install Ubuntu make Action
 if [[ $GUI == *"Install Ubuntu make"* ]]
 then
 	clear
@@ -932,7 +948,7 @@ then
 	notify-send -i utilities-terminal elementary-script "Ubuntu make installed successfully!"
 fi
 
-# Install Record my Desktop
+# Install Record my Desktop Action
 if [[ $GUI == *"Install Record my Desktop"* ]]
 then
 	clear
@@ -942,7 +958,7 @@ then
 	notify-send -i utilities-terminal elementary-script "Record my Desktop installed successfully!"
 fi
 
-# Install Simple screen recorder
+# Install Simple screen recorder Action
 if [[ $GUI == *"Install Simple screen recorder"* ]]
 then
 	clear
@@ -953,8 +969,8 @@ then
 	sudo apt-get -y install simplescreenrecorder
 	notify-send -i utilities-terminal elementary-script "Simple screen recorder installed successfully!"
 fi
-
-# Install Cheese
+ 
+# Install Cheese Action
 if [[ $GUI == *"Install Cheese"* ]]
 then
 	clear
@@ -964,7 +980,7 @@ then
 	notify-send -i utilities-terminal elementary-script "Cheese installed successfully!"
 fi
 
-# Install Gnome media recorder
+# Install Gnome media recorder Action
 if [[ $GUI == *"Install Gnome media recorder"* ]]
 then
 	clear
@@ -974,7 +990,7 @@ then
 	notify-send -i utilities-terminal elementary-script "Gnome media recorder installed successfully!"
 fi
 
-# Install Trimage
+# Install Trimage Action
 if [[ $GUI == *"Install Trimage"* ]]
 then
 	clear
@@ -984,7 +1000,7 @@ then
 	notify-send -i utilities-terminal elementary-script "Trimage installed successfully!"
 fi
 
-# Install GPick
+# Install GPick Action
 if [[ $GUI == *"Install GPick"* ]]
 then
 	clear
@@ -1015,7 +1031,7 @@ then
 	notify-send -i utilities-terminal elementary-script "Cleaning-up junk ran successfully!"
 fi
 
-# Post-install system update
+# Post-install system update Action
 if [[ $GUI == *"Post-install system update"* ]]
 then
 	clear
@@ -1035,9 +1051,6 @@ sleep 2
 exit 0
 
 
-
-#Optimize for battery laptops
-
 #Indicator Workspaces
 #Indicator Terminal
 
@@ -1046,8 +1059,33 @@ exit 0
 #eRadio
 #Piviti
 
-
 #Replace combine
 
+#Wine + Play on linux
+#Unetbootin
+#Typhoon
+#Thunderbird
+#TeamViewer
+#Strem.io
+#TeamSpeak
+#Plex Home Theater
+#My Weather Indicator
+#Grive tools
+#Grub customizer
+#Gparted
+#Dukto
+#Clementine
+#Brackets
+#Umake ides all
+#Viber
+#OS X fonts
+#OBS studio
+#Lightworks
+#Hulu
+#handbrake
+#veracrypt
+#conky
+#aptik
+
+#other themes?
 #https://github.com/Havoqq/elementary-script/blob/master/elementary-script.sh
-nstall Pipelight Silverlight
